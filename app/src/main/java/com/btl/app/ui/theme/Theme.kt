@@ -1,4 +1,4 @@
-package com.sooq.price.ui.theme
+package com.btl.app.ui.theme
 
 import android.app.Activity
 import android.os.Build

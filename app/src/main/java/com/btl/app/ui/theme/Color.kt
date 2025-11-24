@@ -1,4 +1,4 @@
-package com.sooq.price.ui.theme
+package com.btl.app.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
