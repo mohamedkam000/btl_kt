@@ -60,8 +60,7 @@ class MainActivity : ComponentActivity() {
                         verticalArrangement = Arrangement.Top,
                         horizontalAlignment = Alignment.Start
                     ) {
-                        Spacer (modifier
-Modifier.height(100. dp))
+                        Spacer (modifier = Modifier.height(100.dp))
 
                         Text(
                             text = name,
