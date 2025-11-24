@@ -3,7 +3,9 @@ package com.btl.app
 import android.Manifest
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothSocket
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Button
@@ -44,7 +46,8 @@ class MainActivity : AppCompatActivity() {
         btnConnect = findViewById(R.id.btnConnect)
         btnUnlock = findViewById(R.id.btnUnlock)
 
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+        val bluetoothManager = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
+        bluetoothAdapter = bluetoothManager.adapter
 
         btnConnect.setOnClickListener { showPairedDevices() }
         btnUnlock.setOnClickListener { sendUnlockCommand() }
@@ -92,13 +95,24 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            statusText.text = "Missing Bluetooth permission"
+            return
+        }
+
         try {
             bluetoothSocket = device.createRfcommSocketToServiceRecord(myUuid)
             bluetoothSocket?.connect()
             outputStream = bluetoothSocket?.outputStream
             statusText.text = "Successfully connected to ${device.name}"
         } catch (e: IOException) {
-            statusText.text = "Connection failed"
+            statusText.text = "Connection failed: ${e.message}"
+            try {
+                bluetoothSocket?.close()
+            } catch (_: IOException) {
+            }
         }
     }
 
