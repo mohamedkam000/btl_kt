@@ -19,11 +19,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
-import com.btl.app.ui.BTLTheme
+import com.btl.app.ui.theme.AppMaterialTheme
 import com.google.android.material.color.DynamicColors
 import java.io.IOException
 import java.io.OutputStream
 import java.util.UUID
+
+
 
 class MainActivity : ComponentActivity() {
 
@@ -49,7 +51,7 @@ class MainActivity : ComponentActivity() {
             var status by remember { mutableStateOf("Disconnected") }
             var name by remember { mutableStateOf("عبدالله عثمان إدريس عبدالله") }
 
-            BTLTheme {
+            AppMaterialTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     Column(
                         modifier = Modifier
