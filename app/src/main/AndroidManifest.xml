@@ -8,8 +8,7 @@
 
     <application
         android:icon="@mipmap/ic_launcher"
-        android:label="Bluetooth Lock"
-        android:theme="@style/Theme.BluetoothLock">
+        android:label="Bluetooth Lock">
         <activity
             android:name=".MainActivity"
             android:exported="true">
